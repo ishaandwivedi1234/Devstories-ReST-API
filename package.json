@@ -1,7 +1,7 @@
 {
   "name": "DevStoriesApi",
   "version": "1.0.0",
-  "description": "",
+  "description": "developer's story",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
