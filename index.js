@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const home = require('./routes/home')
 const auth =require('./routes/auth')
-require('./db/db')()
+// require('./db/db')()
 
 app.use(express.json())
 app.use('/', home)
