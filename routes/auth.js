@@ -51,7 +51,7 @@ route.post('/auth', async (req, res) => {
     const isValidPassword = await bcrypt.compare(req.body.password, user.password);
     if (!isValidPassword) return res.status(400).send(false)
     const authToken = user.generateAuthToken()
-    res.header('x-auth-token',authToken).send(true)
+    res.header('x-auth-token',authToken).send(user)
 })
 
 route.get('/me', auth, async (req, res) => {
