@@ -61,6 +61,12 @@ route.get('/me', auth, async (req, res) => {
     res.send(user)
 })
 
+route.get('/user/:id', auth, async (req, res) => {
+    const id = req.params.id;
+    const user = await User.findById(id);
+    if (!user) return res.status(400).send('invalid user')
+    res.send(user)
+})
 
 function validateAuthUser(user) {
     const userLoginSchema = { 
