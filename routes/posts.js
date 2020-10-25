@@ -70,7 +70,24 @@ route.put('/:id/:userId', auth, async (req, res) => {
         let post = await Post.findById(req.params.id)
         if (!post) return res.status(401).send('post not found')
         likes = post.likedBy;
-        likes.push(req.params.userId.toString());
+        if (likes.contains(req.params.userId)) {
+            var index;
+            for (var i = 0; i < likes.length; i++){
+                if (likes[i] === req.params.userId.toString) {
+                    index = i;
+                }
+                    
+            }
+            for (var i = index; i < likes.length-1; i++){
+                likes[i] = likes[i + 1];
+            }
+
+            likes.pop();
+        } else {
+            likes.push(req.params.userId.toString());
+        }
+        
+        
         post = await post.set({
         userId: post.userId,
         userProfilePic: post.userProfilePic,
