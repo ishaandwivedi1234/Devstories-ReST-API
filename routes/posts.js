@@ -63,25 +63,26 @@ route.get('/:id', auth, async(req, res) => {
     }
 })
 
-route.put('/:id', auth, async (req, res) => {
+route.put('/:id/:userId', auth, async (req, res) => {
     const { error } = validatePost(req.body)
     if(error) res.status(400).send(error.details[0].message)
     try {
         let post = await Post.findById(req.params.id)
         if (!post) return res.status(401).send('post not found')
-        
+        likes = post.likedBy;
+        likes.push(req.params.userId.toString());
         post = await post.set({
-        userId: req.body.userId,
-        userProfilePic: req.body.userProfilePic,
-        userName: req.body.userName,
-        bgImage: req.body.bgImage,
-        fontColor: req.body.fontColor,
+        userId: post.userId,
+        userProfilePic: post.userProfilePic,
+        userName: post.userName,
+        bgImage: post.bgImage,
+        fontColor: post.fontColor,
         // optional parameters 
-        postDescription: req.body.postDescription,
-        likedBy: req.body.likedBy,
-        images: req.body.images,
-        files: req.body.files,
-        gifs: req.body.gifs
+        postDescription: post.postDescription,
+        likedBy: likes,
+        images: post.images,
+        files: post.files,
+        gifs: post.gifs
         })
         await post.save();
         res.send(post)
