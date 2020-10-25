@@ -25,7 +25,7 @@ function validatePost(post) {
     bgImage: Joi.string(),
     fontColor: Joi.string().required(),
     postDescription: Joi.string(),
-    likedBy: Joi.array(),
+    likedBy: Joi.array().items(Joi.string()),
     images: Joi.array(),
     files: Joi.array(),
     gifs:Joi.array()
