@@ -9,7 +9,7 @@ const postSchema = mongoose.Schema({
     fontColor: { type: String, required: true },
     timeStamp: { type: Date, default:Date.now},
     postDescription: { type: String, required: true },
-    likedBy: { type: Array  },
+    likedBy: [{ type: String  }],
     images: { type: Array},
     files: { type: Array },
     gifs:{type:Array}
