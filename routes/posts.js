@@ -78,7 +78,7 @@ route.put('/:id', auth, async (req, res) => {
         fontColor: req.body.fontColor,
         // optional parameters 
         postDescription: req.body.postDescription,
-        likedBy: [],
+        likedBy: req.body.likedBy,
         images: req.body.images,
         files: req.body.files,
         gifs: req.body.gifs
