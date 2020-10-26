@@ -68,7 +68,7 @@ route.put('/unlike/:id/:userId', auth, async (req, res) => {
     try {
         let post = await Post.findById(req.params.id)
         if (!post) return res.status(401).send('post not found')
-
+        
         likes = post.likedBy;
         _.remove(likes, (e) => e === req.params.userId.toString());
         post = await post.set({
@@ -96,7 +96,7 @@ route.put('/like/:id/:userId', auth, async (req, res) => {
     try {
         let post = await Post.findById(req.params.id)
         if (!post) return res.status(401).send('post not found')
-
+        likes = post.likedBy;
         likes.push(req.params.userId.toString());
         post = await post.set({
         userId: post.userId,
