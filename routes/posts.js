@@ -65,8 +65,6 @@ route.get('/:id', auth, async(req, res) => {
 })
 
 route.put('/unlike/:id/:userId', auth, async (req, res) => {
-    const { error } = validatePost(req.body)
-    if(error) res.status(400).send(error.details[0].message)
     try {
         let post = await Post.findById(req.params.id)
         if (!post) return res.status(401).send('post not found')
@@ -94,8 +92,7 @@ route.put('/unlike/:id/:userId', auth, async (req, res) => {
     }
 })
 route.put('/like/:id/:userId', auth, async (req, res) => {
-    const { error } = validatePost(req.body)
-    if(error) res.status(400).send(error.details[0].message)
+
     try {
         let post = await Post.findById(req.params.id)
         if (!post) return res.status(401).send('post not found')
