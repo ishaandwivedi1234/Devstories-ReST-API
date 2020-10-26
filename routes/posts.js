@@ -70,9 +70,14 @@ route.put('/unlike/:id/:userId', auth, async (req, res) => {
         if (!post) return res.status(401).send('post not found')
         
         var likes = post.likedBy;
-        likes = _.remove(likes, function (e) {
-            return (e === req.params.userId);
-        });
+        var newLikes=[]
+        for (var i = 0; i < likes.length; i++) {
+            if (likes[i] === req.params.userId.toString() || likes[i] == req.params.userId) {
+                
+            } else {
+                newLikes.push(likes[i]);
+            }
+        }
         post = await post.set({
         userId: post.userId,
         userProfilePic: post.userProfilePic,
@@ -81,7 +86,7 @@ route.put('/unlike/:id/:userId', auth, async (req, res) => {
         fontColor: post.fontColor,
         // optional parameters 
         postDescription: post.postDescription,
-        likedBy: likes,
+        likedBy: newLikes,
         images: post.images,
         files: post.files,
         gifs: post.gifs
