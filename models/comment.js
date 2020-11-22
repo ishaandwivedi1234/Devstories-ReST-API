@@ -9,6 +9,7 @@ const commentSchema = new mongoose.Schema({
     message: { type: String, required: true },
     postUserId: { type: mongoose.Types.ObjectId, required: true },
     commentUserId: { type: mongoose.Types.ObjectId, required: true },
+    commentUserName:{type:String,required:true},
     likes: { type: Array },
     commentUserImage:{type:String,required:true},
     timestamp: { type: Date, default: Date.now() }
@@ -24,7 +25,8 @@ function validateComment(comment) {
         postUserId: joi.objectId().required(),
         commentUserId: joi.objectId().required(),
         likes: joi.array(),
-        commentUserImage: joi.string().required()
+        commentUserImage: joi.string().required(),
+        commentUserName:joi.string().required()
     };
 
     return joi.validate(comment, commentsValidationSchema);
