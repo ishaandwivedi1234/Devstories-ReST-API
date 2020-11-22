@@ -13,6 +13,7 @@ router.post('', auth, async (req, res) => {
         message: req.body.message,
         postUserId: req.body.postUserId,
         commentUserId: req.body.commentUserId,
+        commentUserImage: req.body.commentUserImage,
         likes:[]
     })
 
